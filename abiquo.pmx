@@ -1,0 +1,58 @@
+---
+name: Abiquo
+description: Abiquo preview environment
+keywords: abiquo
+type: Default
+documentation: ''
+images:
+- name: rabbit
+  source: mikaelhg/docker-rabbitmq:latest
+  category: Abiquo Management
+  type: Default
+- name: api_redis
+  source: dockerfiles/redis:latest
+  category: Abiquo Management
+  type: Default
+- name: site1_redis
+  source: dockerfiles/redis:latest
+  category: Abiquo Site 1
+  type: Default
+- name: site1_rs
+  source: 192.168.2.52:5000/library/abiquo-rs:latest
+  category: Abiquo Site 1
+  type: Default
+  links:
+  - service: rabbit
+    alias: rabbit
+  - service: site1_redis
+    alias: redis
+- name: kinton
+  source: 192.168.2.52:5000/library/galera:latest
+  category: Abiquo Management
+  type: Default
+- name: api_2
+  source: 192.168.2.52:5000/library/abiquo-api:latest
+  category: Abiquo Management
+  type: Default
+  links:
+  - service: rabbit
+    alias: rabbit
+  - service: api_redis
+    alias: redis
+  - service: kinton
+    alias: db
+  environment:
+  - variable: MYSQL_USER
+    value: root
+  - variable: MYSQL_PASSWD
+    value: kinton
+- name: ui
+  source: 192.168.2.52:5000/library/abiquo-ui:latest
+  category: Abiquo Management
+  type: Default
+  links:
+  - service: api_2
+    alias: api
+  environment:
+  - variable: UI_ENDPOINT
+    value: http://localhost:8443/api
