@@ -30,7 +30,7 @@ images:
   source: 192.168.2.52:5000/library/galera:latest
   category: Abiquo Management
   type: Default
-- name: api
+- name: abiquo-api
   source: 192.168.2.52:5000/library/abiquo-api:latest
   category: Abiquo Management
   type: Default
@@ -46,12 +46,12 @@ images:
     value: root
   - variable: MYSQL_PASSWD
     value: kinton
-- name: ui
+- name: abiquo-ui
   source: 192.168.2.52:5000/library/abiquo-ui:latest
   category: Abiquo Management
   type: Default
   links:
-  - service: api
+  - service: abiquo-api
     alias: api
   environment:
   - variable: UI_ENDPOINT
