@@ -58,4 +58,4 @@ images:
     alias: api
   environment:
   - variable: UI_ENDPOINT
-    value: http://localhost:8443/api
+    value: http://panamax.local:8443/api
