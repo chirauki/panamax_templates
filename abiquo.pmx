@@ -30,6 +30,9 @@ images:
   source: 192.168.2.52:5000/library/galera:latest
   category: Abiquo Management
   type: Default
+  environment:
+  - variable: MYSQL_PASSWD
+    value: kinton
 - name: abiquo-api
   source: 192.168.2.52:5000/library/abiquo-api:latest
   category: Abiquo Management
